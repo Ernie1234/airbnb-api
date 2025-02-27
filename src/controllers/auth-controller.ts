@@ -65,7 +65,7 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 //  LOGIN OR SIGNIN USER
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response): Promise<Response> => {
   const { email, password } = req.body;
   try {
     const existingUser = await user.findOne({
