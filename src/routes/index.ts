@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import loggerRouter from './logger-router';
+import authRouter from './auth-router';
 
 const router: Router = Router();
 
-router.use('/logger', loggerRouter);
+router.use('/auth', authRouter);
 
 export default router;
