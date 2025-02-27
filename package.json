@@ -1,0 +1,81 @@
+{
+  "name": "express-mongodb-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "_moduleAlias": {
+    "@middlewares": "dist/middlewares",
+    "@routes": "dist/routes",
+    "@services": "dist/services",
+    "@utils": "dist/utils",
+    "@config": "dist/config",
+    "@constants": "dist/constants",
+    "@libs": "dist/libs",
+    "@models": "dist/models",
+    "@controllers": "dist/controllers",
+    "@types": "dist/types"
+  },
+  "scripts": {
+    "test": "jest --coverage",
+    "build": "tsc",
+    "start": "node -r module-alias/register dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/server.ts",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint --fix",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/morgan": "^1.9.9",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "module-alias": "^2.2.3",
+    "morgan": "^1.10.0",
+    "supertest": "^7.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.5",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.8.3",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-jest": "^28.11.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-sonarjs": "^1.0.3",
+    "eslint-plugin-unicorn": "^53.0.0",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "jest-ts-webcompat-resolver": "^1.0.0",
+    "lint-staged": "^15.4.3",
+    "ts-jest": "^29.2.6",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.5.4"
+  }
+}
