@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app, main } from '../src/index';
+import app, { main } from '../src/index'; // Correctly import app and main
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let server: any; // Declare a variable to hold the server instance
