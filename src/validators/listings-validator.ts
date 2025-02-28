@@ -1,7 +1,12 @@
 import Joi from 'joi';
 
 // Define the schema for the Listing model
-const titleSchema = Joi.string().min(5).max(100).required().message('Title must be between 5 and 100 characters long.');
+const titleSchema = Joi.string()
+  .min(5)
+  .max(100)
+  .required()
+
+  .message('Title must be between 5 and 100 characters long.');
 
 const descriptionSchema = Joi.string()
   .min(10)
