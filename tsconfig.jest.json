@@ -20,6 +20,7 @@
       "@libs/*": ["libs/*"],
       "@models/*": ["models/*"],
       "@controllers/*": ["controllers/*"],
+      "@validators/*": ["validators/*"],
       "@services/*": ["services/*"],
     }
   },

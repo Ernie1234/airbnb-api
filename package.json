@@ -13,7 +13,8 @@
     "@libs": "dist/libs",
     "@models": "dist/models",
     "@controllers": "dist/controllers",
-    "@types": "dist/types"
+    "@types": "dist/types",
+    "@validators": "dist/validators"
   },
   "scripts": {
     "test": "jest --coverage",

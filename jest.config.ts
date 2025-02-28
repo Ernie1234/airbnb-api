@@ -15,6 +15,7 @@ export default {
     '^@config/(.*)$': '<rootDir>/src/config/$1',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
     '^@controllers/(.*)$': '<rootDir>/src/controllers/$1',
+    '^@validators/(.*)$': '<rootDir>/src/validators/$1',
     '^@constants/(.*)$': '<rootDir>/src/constants/$1',
   },
   resolver: 'jest-ts-webcompat-resolver',

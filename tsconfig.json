@@ -19,6 +19,7 @@
       "@middlewares/*": ["middlewares/*"],
       "@config/*": ["config/*"],
       "@constants/*": ["constants/*"],
+      "@validators/*": ["validators/*"],
       "@libs/*": ["libs/*"],
     }
   },
