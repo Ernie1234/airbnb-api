@@ -1,27 +1,36 @@
-/* eslint-disable no-shadow */
-import mongoose from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 
+// eslint-disable-next-line no-shadow
 export enum ERole {
   USER = 'USER',
   ADMIN = 'ADMIN',
 }
 
-export interface IUser {
+export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
   role: ERole;
   isActive: boolean;
+  isVerified: boolean;
+  lastLogin?: Date;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
+  verificationToken?: string;
+  verificationTokenExpiresAt?: Date;
   createdAt: Date;
+  updatedAt: Date;
+  Listings: mongoose.Types.ObjectId[];
+  Reservations: mongoose.Types.ObjectId[];
 }
 
-const UserSchema = new mongoose.Schema(
+// Define the User schema
+const UserSchema: Schema = new Schema(
   {
     email: {
       type: String,
       unique: true,
       required: true,
-      // sparse: true,
     },
     name: {
       type: String,
@@ -34,7 +43,7 @@ const UserSchema = new mongoose.Schema(
     },
     lastLogin: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
     },
     isVerified: {
       type: Boolean,
@@ -42,13 +51,13 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['ADMIN', 'USER'],
-      default: 'USER',
+      enum: Object.values(ERole),
+      default: ERole.USER,
     },
-    resetPasswordToken: String,
-    resetPasswordExpires: Date,
-    verificationTokenExpiresAt: Date,
-    verificationToken: String,
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
+    verificationToken: { type: String },
+    verificationTokenExpiresAt: { type: Date },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -57,26 +66,32 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    notes: [
+    Listings: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Notes',
+        ref: 'Listing', // Ensure this matches the Listing model name
+      },
+    ],
+    Reservations: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Reservation', // Ensure this matches the Reservation model name
       },
     ],
   },
   {
-    // timestamps: true,
+    timestamps: true,
     toJSON: {
       transform: (doc, ret) => {
         const transformedRet = { ...ret };
-        delete transformedRet.password;
-        delete transformedRet.__v;
-        transformedRet.id = transformedRet._id;
-        delete transformedRet._id;
+        delete transformedRet.password; // Exclude password from JSON output
+        delete transformedRet.__v; // Exclude version key
+        transformedRet.id = transformedRet._id; // Include id field
+        delete transformedRet._id; // Remove _id field
         return transformedRet;
       },
     },
   },
 );
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model<IUser>('User', UserSchema);
