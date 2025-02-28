@@ -17,7 +17,7 @@ import { generateToken } from '@utils/jwt';
 
 const isUniqueUser = async (email: string) => !user.findOne({ email });
 
-export const registerUser = async (req: Request, res: Response) => {
+export const registerUser = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { name, email, password } = req.body;
 
