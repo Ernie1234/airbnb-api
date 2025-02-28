@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Application, Request, Response } from 'express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import helmet from 'helmet';
@@ -12,7 +12,7 @@ import routes from './routes/index';
 
 const { PORT, MONGODB_URL } = envConfig;
 
-export const app = express();
+export const app: Application = express();
 // eslint-disable-next-line consistent-return
 export const main = async () => {
   try {
