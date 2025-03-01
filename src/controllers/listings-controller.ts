@@ -1,8 +1,19 @@
 import { Request, Response } from 'express';
+
 import Logger from '@libs/logger';
 import HTTP_STATUS from '@constants/http-status';
 import { serverErrorMsg } from '@constants/messages';
 
+export const createListing = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const {} = req.body;
+    Logger.info('Create Listing');
+    return res.status(HTTP_STATUS.OK).json({ message: 'Created Listing!' });
+  } catch (error) {
+    Logger.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: serverErrorMsg });
+  }
+};
 export const getAllListings = async (req: Request, res: Response): Promise<Response> => {
   try {
     Logger.info('User Listings');
@@ -13,7 +24,6 @@ export const getAllListings = async (req: Request, res: Response): Promise<Respo
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: serverErrorMsg });
   }
 };
-
 export const getListing = async (req: Request, res: Response): Promise<Response> => {
   try {
     Logger.info('Login user');
