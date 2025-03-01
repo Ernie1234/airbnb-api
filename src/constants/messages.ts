@@ -9,7 +9,7 @@ export const fetchedSuccessMsg = 'Fetched successfully!';
 export const loginSuccessMsg = 'Login Successfully!';
 
 export const noUserMsg = 'No User found!';
-export const noNoteMsg = 'Note not found';
+export const noPropertyMsg = 'Property not found';
 export const InsufficientPropertyMsg = 'Insufficient property quantity';
 
 export const userAlreadyExist = 'User already exists';

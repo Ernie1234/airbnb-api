@@ -23,13 +23,10 @@ const locationSchema = Joi.string().required().messages({
   'any.required': 'Location is required.',
 });
 
-const imagesSchema = Joi.array()
-  .items(
-    Joi.string().uri().messages({
-      'string.uri': 'Each image must be a valid URL.',
-    }),
-  )
-  .optional();
+const imageSrcSchema = Joi.string().uri().required().messages({
+  'string.uri': 'Image source must be a valid URL.',
+  'any.required': 'Image source is required.',
+});
 
 const availabilitySchema = Joi.object({
   startDate: Joi.date().required().messages({
@@ -69,7 +66,7 @@ export const createListingSchema = Joi.object({
   description: descriptionSchema,
   price: priceSchema,
   location: locationSchema,
-  images: imagesSchema,
+  images: imageSrcSchema,
   category: categorySchema,
   bathroomCount: bathroomCountSchema,
   roomCount: roomCountSchema,
@@ -82,7 +79,7 @@ export const updateListingSchema = Joi.object({
   description: descriptionSchema.optional(),
   price: priceSchema.optional(),
   location: locationSchema.optional(),
-  images: imagesSchema.optional(),
+  images: imageSrcSchema.optional(),
   availability: availabilitySchema.optional(),
   category: categorySchema.optional(),
   bathroomCount: bathroomCountSchema.optional(),

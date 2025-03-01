@@ -10,6 +10,6 @@ listingRoutes.get('/', getAllListings);
 
 listingRoutes.post('/', authenticationJWT, validateCreateListing, createListing);
 
-listingRoutes.get('/:id', authenticationJWT, getListing);
+listingRoutes.get('/:listingId', authenticationJWT, getListing);
 
 export default listingRoutes;
