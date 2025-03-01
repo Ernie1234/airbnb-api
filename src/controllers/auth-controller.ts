@@ -10,7 +10,7 @@ import { generateAccessToken } from '@utils/jwt';
 
 export const registerUser = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { email, password, firstName, lastName } = req.body;
+    const { email, password, firstName, lastName, confirmPassword } = req.body;
     const name = `${firstName} ${lastName}`;
 
     const existingUser = await User.findOne({ email });
@@ -19,6 +19,14 @@ export const registerUser = async (req: Request, res: Response): Promise<Respons
       return res.status(HTTP_STATUS.CONFLICT).json({
         success: false,
         message: userAlreadyExist,
+      });
+    }
+
+    if (password !== confirmPassword) {
+      Logger.error('Passwords do not match');
+      return res.status(HTTP_STATUS.BAD_REQUEST).json({
+        success: false,
+        message: 'Passwords do not match',
       });
     }
 

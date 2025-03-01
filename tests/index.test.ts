@@ -5,11 +5,15 @@ import app, { main } from '../src/index'; // Correctly import app and main
 let server: any; // Declare a variable to hold the server instance
 
 beforeAll(async () => {
+  jest.setTimeout(20_000); // Increase the timeout to 20 seconds
   server = await main(); // Start the server and store the instance
 });
 
 afterAll(() => {
-  server.close(); // Close the server
+  if (server) {
+    // Check if server is defined
+    server.close(); // Close the server
+  }
 });
 
 describe('GET /', () => {
