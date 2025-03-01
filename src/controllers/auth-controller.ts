@@ -112,6 +112,7 @@ export const loginUser = async (req: Request, res: Response): Promise<Response> 
       message: 'Sign-in successful',
       user: {
         ...userObject,
+        token,
         password: undefined,
       },
     });
