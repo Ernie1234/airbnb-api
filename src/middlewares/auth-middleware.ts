@@ -12,6 +12,8 @@ import {
   userLoginSchema,
   userRegistrationSchema,
 } from '@validators/auth-validator';
+import { verifyToken } from '@utils/jwt';
+import Logger from '@libs/logger';
 
 const formatJoiError = (error: Joi.ValidationError): Record<string, string> =>
   // eslint-disable-next-line implicit-arrow-linebreak
@@ -47,4 +49,22 @@ export const validateResetPassword = (req: Request, res: Response, next: NextFun
 
   req.body = value;
   next();
+};
+
+// eslint-disable-next-line consistent-return
+export const authenticationJWT = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Access denied. No Token provided!' });
+  }
+
+  try {
+    // Verify the token
+    req.user = verifyToken(token);
+    next();
+  } catch (error) {
+    Logger.error(error);
+    return res.status(403).json({ message: 'Invalid or expired Token!' });
+  }
 };

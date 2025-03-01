@@ -16,7 +16,13 @@ const app = express();
 export const main = async () => {
   try {
     app.use(helmet());
-    app.use(cors());
+    app.use(
+      cors({
+        origin: ['*'], // Specify your frontend domain
+        methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+      }),
+    );
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(morganMiddleware);
