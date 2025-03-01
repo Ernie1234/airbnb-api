@@ -86,3 +86,16 @@ export const updateListingSchema = Joi.object({
   roomCount: roomCountSchema.optional(),
   guestCount: guestCountSchema.optional(),
 });
+
+// Define the ObjectId validation schema
+export const objectIdValidationSchema = Joi.object({
+  listingId: Joi.string()
+    .pattern(/^[\dA-Fa-f]{24}$/) // MongoDB ObjectId pattern
+    .required()
+    .messages({
+      'string.base': 'Listing ID must be a string',
+      'string.empty': 'Listing ID cannot be empty',
+      'string.pattern.base': 'Listing ID is invalid',
+      'any.required': 'Listing ID is required',
+    }),
+});
