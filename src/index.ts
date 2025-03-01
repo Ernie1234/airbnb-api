@@ -8,7 +8,7 @@ import connectDb from '@config/connect';
 import envConfig from './config/env-config';
 import routes from './routes/index';
 
-const { PORT, MONGODB_URL } = envConfig;
+const { PORT, MONGODB_URL, FRONTEND_BASE_URL } = envConfig;
 
 const app = express();
 
@@ -18,9 +18,8 @@ export const main = async () => {
     app.use(helmet());
     app.use(
       cors({
-        origin: ['*'], // Specify your frontend domain
-        methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        origin: [FRONTEND_BASE_URL],
+        credentials: true,
       }),
     );
     app.use(express.json());
