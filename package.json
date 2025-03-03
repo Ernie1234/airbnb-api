@@ -2,7 +2,7 @@
   "name": "express-mongodb-template",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "_moduleAlias": {
     "@middlewares": "dist/middlewares",
     "@routes": "dist/routes",
