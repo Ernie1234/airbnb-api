@@ -44,7 +44,7 @@ export const registerUser = async (req: Request, res: Response): Promise<Respons
     await newUser.save();
     const userObject = newUser.toObject();
 
-    // generateAccessToken({ role: userObject.role, userId: userObject.id });
+    generateAccessToken({ role: userObject.role, userId: userObject.id });
     // await sendVerificationEmail(user?.email as string, verificationToken);
 
     Logger.info(`User created: ${userObject.id}`);
@@ -70,18 +70,24 @@ export const registerUser = async (req: Request, res: Response): Promise<Respons
 export const loginUser = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({
-      email,
-    });
-    if (!user) {
+
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
       Logger.error(invalidCredentialsMsg);
       return res.status(HTTP_STATUS.BAD_REQUEST).json({
         success: false,
         message: invalidCredentialsMsg,
       });
     }
+    // if (!existingUser) {
+    //   Logger.error(invalidCredentialsMsg);
+    //   return res.status(HTTP_STATUS.BAD_REQUEST).json({
+    //     success: false,
+    //     message: invalidCredentialsMsg,
+    //   });
+    // }
 
-    if (typeof user.password !== 'string') {
+    if (typeof existingUser.password !== 'string') {
       Logger.error('User password is not a string');
       return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
         success: false,
@@ -89,7 +95,7 @@ export const loginUser = async (req: Request, res: Response): Promise<Response> 
       });
     }
     // Compare provided password with stored hashed password
-    const isMatch = await bcryptjs.compare(password, user.password);
+    const isMatch = await bcryptjs.compare(password, existingUser.password);
 
     if (!isMatch) {
       Logger.error(invalidCredentialsMsg);
@@ -99,13 +105,13 @@ export const loginUser = async (req: Request, res: Response): Promise<Response> 
       });
     }
 
-    const token = generateAccessToken({ role: user.role, userId: user.id });
-    Logger.info(`User logged in: ${user.id} with token: ${token}`);
+    const token = generateAccessToken({ role: existingUser.role, userId: existingUser.id });
+    Logger.info(`User logged in: ${existingUser.id} with token: ${token}`);
 
-    user.lastLogin = new Date();
-    await user.save();
+    existingUser.lastLogin = new Date();
+    await existingUser.save();
 
-    const userObject = user.toObject();
+    const userObject = existingUser.toObject();
 
     return res.status(HTTP_STATUS.OK).json({
       success: true,
