@@ -45,7 +45,7 @@ export const createListing = async (req: Request, res: Response): Promise<Respon
 };
 export const getAllListings = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const allListings = await Listing.find();
+    const allListings = await Listing.find().sort({ createdAt: -1 });
     Logger.info('All properties fetched successfully');
     return res.status(HTTP_STATUS.OK).json({
       success: true,
