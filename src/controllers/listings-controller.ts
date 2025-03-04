@@ -7,6 +7,10 @@ import { noPropertyMsg, noUserMsg, propertyExistMsg, serverErrorMsg, successProp
 import User from '@models/user';
 import Listing from '@models/listing';
 
+interface ListingQuery {
+  category?: string;
+}
+
 export const createListing = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { title, description, price, location, images, category, bathroomCount, roomCount, guestCount } = req.body;
@@ -45,7 +49,22 @@ export const createListing = async (req: Request, res: Response): Promise<Respon
 };
 export const getAllListings = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const allListings = await Listing.find().sort({ createdAt: -1 });
+    const { category } = req.query;
+    Logger.info(`Received category query: ${category}`);
+
+    const query: ListingQuery = {};
+    if (category && typeof category === 'string') {
+      query.category = category.trim();
+      Logger.info(`Querying for category: ${query.category}`);
+    }
+
+    // const allListings = await Listing.find({ ...query }).sort({ createdAt: -1 });
+
+    const allListings = await Listing.aggregate([
+      { $match: query }, // Filter by category
+      { $sort: { createdAt: -1 } }, // Sort by createdAt
+    ]);
+    Logger.info(`Query executed: ${JSON.stringify(query)}`);
     Logger.info('All properties fetched successfully');
     return res.status(HTTP_STATUS.OK).json({
       success: true,
