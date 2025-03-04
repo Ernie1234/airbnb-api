@@ -6,10 +6,9 @@ import { validateCreateListing, validateListingId } from '@middlewares/listings-
 
 const listingRoutes: Router = express.Router();
 
-listingRoutes.get('/', getAllListings);
-
 listingRoutes.post('/', authenticationJWT, validateCreateListing, createListing);
 
-listingRoutes.get('/:listingId', authenticationJWT, validateListingId, getListing);
+listingRoutes.get('/', getAllListings);
+listingRoutes.get('/:listingId', validateListingId, getListing);
 
 export default listingRoutes;
