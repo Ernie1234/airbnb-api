@@ -20,6 +20,7 @@ export interface IUser extends Document {
   verificationTokenExpiresAt?: Date;
   createdAt: Date;
   updatedAt: Date;
+  favouriteIds: string[];
   Listings: mongoose.Types.ObjectId[];
   Reservations: mongoose.Types.ObjectId[];
 }
@@ -66,6 +67,12 @@ const UserSchema: Schema = new Schema(
       type: Date,
       default: Date.now,
     },
+    favouriteIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Listing',
+      },
+    ],
     Listings: [
       {
         type: mongoose.Schema.Types.ObjectId,

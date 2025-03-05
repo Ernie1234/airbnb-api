@@ -78,7 +78,7 @@ export const getAllListings = async (req: Request, res: Response): Promise<Respo
 };
 export const getListing = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const listing = await Listing.findById(req.params.listingId);
+    const listing = await Listing.findById(req.params.listingId).populate('userId');
     if (!listing) {
       Logger.error(noPropertyMsg);
       return res.status(HTTP_STATUS.NOT_FOUND).json({ message: noPropertyMsg });
