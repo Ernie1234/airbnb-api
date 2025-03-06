@@ -11,9 +11,9 @@ import {
   resetPasswordSchema,
   userLoginSchema,
   userRegistrationSchema,
-} from '@validators/auth-validator';
-import { verifyToken } from '@utils/jwt';
-import Logger from '@libs/logger';
+} from '../validators/auth-validator';
+import { verifyToken } from '../utils/jwt';
+import Logger from '../libs/logger';
 
 const formatJoiError = (error: Joi.ValidationError): Record<string, string> =>
   // eslint-disable-next-line implicit-arrow-linebreak

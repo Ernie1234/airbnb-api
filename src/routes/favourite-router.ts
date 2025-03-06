@@ -1,10 +1,11 @@
+import express, { Router } from 'express';
+
 import {
   createFavouriteListing,
   deleteFavouriteListing,
   getFavouriteListings,
-} from '@controllers/favouriting-controller';
-import { authenticationJWT } from '@middlewares/auth-middleware';
-import express, { Router } from 'express';
+} from '../controllers/favouriting-controller';
+import { authenticationJWT } from '../middlewares/auth-middleware';
 
 const listingRoutes: Router = express.Router();
 

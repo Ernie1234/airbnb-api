@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
-import HTTP_STATUS from '@constants/http-status';
-import { noUserMsg, serverErrorMsg, successPropertyMsg } from '@constants/messages';
-import Logger from '@libs/logger';
-import User from '@models/user';
 import { Request, Response } from 'express';
+
+import HTTP_STATUS from '../constants/http-status';
+import { noUserMsg, serverErrorMsg, successPropertyMsg } from '../constants/messages';
+import Logger from '../libs/logger';
+import User from '../models/user';
 
 export const createFavouriteListing = async (req: Request, res: Response): Promise<Response> => {
   try {

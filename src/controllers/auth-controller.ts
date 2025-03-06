@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import bcryptjs from 'bcryptjs';
 
-import HTTP_STATUS from '@constants/http-status';
-import { createdMsg, invalidCredentialsMsg, serverErrorMsg, userAlreadyExist } from '@constants/messages';
-import Logger from '@libs/logger';
-import User from '@models/user';
-import { generateVerificationToken } from '@utils/generate-functions';
-import { generateAccessToken } from '@utils/jwt';
+import HTTP_STATUS from '../constants/http-status';
+import { createdMsg, invalidCredentialsMsg, serverErrorMsg, userAlreadyExist } from '../constants/messages';
+import Logger from '../libs/logger';
+import User from '../models/user';
+import { generateVerificationToken } from '../utils/generate-functions';
+import { generateAccessToken } from '../utils/jwt';
 
 export const registerUser = async (req: Request, res: Response): Promise<Response> => {
   try {
