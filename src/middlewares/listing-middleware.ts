@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi, { Schema } from 'joi';
 
-import { createListingSchema, updateListingSchema } from '@validators/listings-validator';
+import { createListingSchema, updateListingSchema } from '../validators/listings-validator';
 
 const formatJoiError = (error: Joi.ValidationError) => {
   const formattedError: { [key: string]: string } = {};

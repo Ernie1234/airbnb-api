@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 import { Request, Response } from 'express';
 
-import Logger from '@libs/logger';
-import HTTP_STATUS from '@constants/http-status';
-import { noPropertyMsg, noUserMsg, propertyExistMsg, serverErrorMsg, successPropertyMsg } from '@constants/messages';
-import User from '@models/user';
-import Listing from '@models/listing';
+import Logger from '../libs/logger';
+import HTTP_STATUS from '../constants/http-status';
+import { noPropertyMsg, noUserMsg, propertyExistMsg, serverErrorMsg, successPropertyMsg } from '../constants/messages';
+import User from '../models/user';
+import Listing from '../models/listing';
 
 interface ListingQuery {
   category?: string;

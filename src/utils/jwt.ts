@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
-import Logger from '@libs/logger';
-import { ERole } from '@models/user';
+import Logger from '../libs/logger';
+import { ERole } from '../models/user';
 import envConfig from '../config/env-config';
 
 const { JWT_SECRET } = envConfig;
