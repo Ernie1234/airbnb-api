@@ -2,9 +2,9 @@ import express, { Request, Response } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import Logger from '@libs/logger';
-import morganMiddleware from '@middlewares/morgan-middleware';
-import connectDb from '@config/connect';
+import Logger from './libs/logger';
+import morganMiddleware from './middlewares/morgan-middleware';
+import connectDb from './config/connect';
 import envConfig from './config/env-config';
 import routes from './routes/index';
 
