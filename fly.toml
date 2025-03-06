@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for airbnb-api on 2025-03-06T07:49:49Z
+# fly.toml app configuration file generated for airbnb-api on 2025-03-06T09:47:06Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'airbnb-api'
-primary_region = 'cdg'
+primary_region = 'lhr'
 
 [build]
 
