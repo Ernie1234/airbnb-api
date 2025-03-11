@@ -16,7 +16,7 @@ type ENV = Partial<EnvConfig> & {
 const getConfig = (): ENV => ({
   PORT: Number(process.env.PORT),
   NODE_ENV: process.env.NODE_ENV,
-  MONGODB_URL: process.env.DATABASE_URI,
+  MONGODB_URL: process.env.MONGODB_URL,
   FRONTEND_BASE_URL: process.env.FRONTEND_BASE_URL,
   JWT_SECRET: process.env.JWT_SECRET,
   LOG_LEVEL: process.env.LOG_LEVEL || 'info', // Default log level to 'info' if not specified in.env file
