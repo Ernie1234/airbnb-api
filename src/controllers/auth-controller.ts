@@ -130,3 +130,36 @@ export const loginUser = async (req: Request, res: Response): Promise<Response> 
     });
   }
 };
+
+export const checkSession = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const idUser = req.user?.userId;
+
+    const user = await User.findById(idUser);
+    if (!user) {
+      Logger.error('User not found');
+      return res.status(HTTP_STATUS.NOT_FOUND).json({
+        success: false,
+        message: 'User not found.',
+      });
+    }
+
+    return res.status(HTTP_STATUS.OK).json({
+      success: true,
+      message: 'Session is valid.',
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        isVerified: user.isVerified,
+      },
+    });
+  } catch (error) {
+    Logger.error(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: 'Failed to check session.',
+    });
+  }
+};

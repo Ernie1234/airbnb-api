@@ -68,3 +68,28 @@ export const authenticationJWT = (req: Request, res: Response, next: NextFunctio
     return res.status(403).json({ message: 'Invalid or expired Token!' });
   }
 };
+
+export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>
+
+  if (!token) {
+    Logger.error('No token provided');
+    return res.status(401).json({
+      success: false,
+      message: 'Access denied. No token provided.',
+    });
+  }
+
+  try {
+    const decoded = verifyToken(token);
+    req.user = decoded; // Attach the decoded user payload to the request object
+    next();
+  } catch {
+    Logger.error('Invalid token');
+    return res.status(403).json({
+      success: false,
+      message: 'Invalid token.',
+    });
+  }
+};
