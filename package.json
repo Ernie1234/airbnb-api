@@ -19,7 +19,7 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "tsc",
-    "start": "node -r module-alias/register dist/server.js",
+    "start": "node -r module-alias/register dist/server.js && ls dist",
     "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/server.ts",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint --fix",
