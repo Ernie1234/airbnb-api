@@ -3,7 +3,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface IListing extends Document {
   title: string;
   description: string;
-  imageSrc: string;
+  imageSrc: string[];
   createdAt: Date;
   updatedAt: Date;
   category: string;
@@ -20,7 +20,7 @@ const ListingSchema: Schema = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    imageSrc: { type: String, required: true },
+    imageSrc: { type: [String], required: true },
     category: { type: String, required: true },
     bathroomCount: { type: Number, required: true },
     roomCount: { type: Number, required: true },

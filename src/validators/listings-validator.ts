@@ -23,9 +23,11 @@ const locationSchema = Joi.string().required().messages({
   'any.required': 'Location is required.',
 });
 
-const imageSrcSchema = Joi.string().uri().required().messages({
-  'string.uri': 'Image source must be a valid URL.',
-  'any.required': 'Image source is required.',
+const imageSrcSchema = Joi.array().items(Joi.string().uri().required()).min(1).required().messages({
+  'array.base': 'Images must be an array of URLs.',
+  'array.min': 'At least one image is required.',
+  'string.uri': 'Each image source must be a valid URL.',
+  'any.required': 'Images are required.',
 });
 
 const availabilitySchema = Joi.object({
