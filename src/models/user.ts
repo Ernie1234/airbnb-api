@@ -11,6 +11,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   role: ERole;
+  imageSrc: string;
   isActive: boolean;
   isVerified: boolean;
   lastLogin?: Date;
@@ -36,6 +37,10 @@ const UserSchema: Schema = new Schema(
     name: {
       type: String,
       minlength: 2,
+      required: true,
+    },
+    imageSrc: {
+      type: String,
       required: true,
     },
     password: {

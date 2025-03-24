@@ -33,9 +33,12 @@ export const registerUser = async (req: Request, res: Response): Promise<Respons
     const hashedPassword = await bcryptjs.hash(password, 10);
     const verificationToken = generateVerificationToken();
 
+    const imageSrc = `https://robohash.org/${name}?set=set3&size=50x50`;
+
     const newUser = new User({
       email,
       name,
+      imageSrc,
       verificationToken,
       password: hashedPassword,
       verificationTokenExpiresAt: new Date(Date.now() + 5 * 60 * 1000),
