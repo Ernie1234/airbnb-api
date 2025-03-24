@@ -23,3 +23,8 @@ export const pwdRequiredMsg = 'Password is required';
 export const emailRequiredMsg = 'Email is required';
 export const invalidEmailMsg = 'Email must be a valid email address';
 export const unauthorizedMsg = 'Unauthorized!';
+
+export const noReservationMsg = 'Reservation not found';
+export const reservationConflictMsg = 'The selected dates are already booked';
+export const successReservationMsg = 'Reservation created successfully';
+export const noListingMsg = 'Please select a list of dates to be listed in the reservation list';

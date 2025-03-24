@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable indent */
 /* eslint-disable max-len */
 /* eslint-disable implicit-arrow-linebreak */
@@ -51,7 +52,6 @@ export const validateResetPassword = (req: Request, res: Response, next: NextFun
   next();
 };
 
-// eslint-disable-next-line consistent-return
 export const authenticationJWT = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(' ')[1];
 
