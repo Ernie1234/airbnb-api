@@ -8,9 +8,9 @@ const titleSchema = Joi.string().min(5).max(100).required().messages({
   'any.required': 'Title is required.',
 });
 
-const descriptionSchema = Joi.string().min(10).max(500).required().messages({
+const descriptionSchema = Joi.string().min(10).max(5000).required().messages({
   'string.min': 'Description must be at least 10 characters long.',
-  'string.max': 'Description must be no more than 500 characters long.',
+  'string.max': 'Description must be no more than 5000 characters long.',
   'any.required': 'Description is required.',
 });
 
