@@ -1,5 +1,4 @@
 /* eslint-disable consistent-return */
-// src/middlewares/reservation-middleware.ts
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
 

@@ -28,3 +28,6 @@ export const noReservationMsg = 'Reservation not found';
 export const reservationConflictMsg = 'The selected dates are already booked';
 export const successReservationMsg = 'Reservation created successfully';
 export const noListingMsg = 'Please select a list of dates to be listed in the reservation list';
+
+export const noCommentMsg = 'Comment not found';
+export const successCommentMsg = 'Comment operation successful';
