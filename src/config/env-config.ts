@@ -8,6 +8,7 @@ type EnvConfig = {
   LOG_LEVEL: string;
   FRONTEND_BASE_URL: string;
   VERCEL_BASE_URL: string;
+  MOBILE_APP_BASE_URL: string;
 };
 
 type ENV = Partial<EnvConfig> & {
@@ -21,6 +22,7 @@ const getConfig = (): ENV => ({
   FRONTEND_BASE_URL: process.env.FRONTEND_BASE_URL,
   VERCEL_BASE_URL: process.env.VERCEL_BASE_URL,
   JWT_SECRET: process.env.JWT_SECRET,
+  MOBILE_APP_BASE_URL: process.env.MOBILE_APP_BASE_URL,
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
 });
 
