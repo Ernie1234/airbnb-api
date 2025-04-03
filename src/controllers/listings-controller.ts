@@ -75,6 +75,7 @@ export const getAllListings = async (req: Request, res: Response): Promise<Respo
     if (category && typeof category === 'string') {
       query.category = category.trim();
     }
+
     if (minPrice) {
       query.price = { $gte: Number(minPrice) };
     }
@@ -95,25 +96,25 @@ export const getAllListings = async (req: Request, res: Response): Promise<Respo
     // Calculate pagination skip value
     const skip = (Number(page) - 1) * Number(limit);
 
-    // Fetch listings with query, sorting, and pagination
     // eslint-disable-next-line unicorn/no-array-callback-reference
-    const allListings = await Listing.find(query) // Pass the query object directly
-      .sort(sortOptions)
-      .skip(skip)
-      .limit(Number(limit));
-
-    // Get the total number of listings matching the query
-    const totalListings = await Listing.countDocuments(query);
+    const [listings, total] = await Promise.all([
+      Listing.find({ ...query })
+        .sort(sortOptions)
+        .skip(skip)
+        .limit(Number(limit)),
+      Listing.countDocuments(query),
+    ]);
 
     Logger.info('All properties fetched successfully');
     return res.status(HTTP_STATUS.OK).json({
       success: true,
       message: successPropertyMsg,
       data: {
-        listings: allListings,
-        total: totalListings,
+        listings,
+        total,
         page: Number(page),
         limit: Number(limit),
+        hasMore: skip * Number(limit) < total,
       },
     });
   } catch (error) {
