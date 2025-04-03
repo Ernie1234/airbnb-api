@@ -8,7 +8,7 @@ import connectDb from './config/connect';
 import envConfig from './config/env-config';
 import routes from './routes/index';
 
-const { PORT, MONGODB_URL, FRONTEND_BASE_URL } = envConfig;
+const { PORT, MONGODB_URL, FRONTEND_BASE_URL, VERCEL_BASE_URL } = envConfig;
 
 const app = express();
 
@@ -18,7 +18,7 @@ export const main = async () => {
     app.use(helmet());
     app.use(
       cors({
-        origin: [FRONTEND_BASE_URL],
+        origin: [FRONTEND_BASE_URL, VERCEL_BASE_URL],
         credentials: true,
       }),
     );

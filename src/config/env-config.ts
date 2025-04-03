@@ -7,6 +7,7 @@ type EnvConfig = {
   JWT_SECRET: string;
   LOG_LEVEL: string;
   FRONTEND_BASE_URL: string;
+  VERCEL_BASE_URL: string;
 };
 
 type ENV = Partial<EnvConfig> & {
@@ -18,8 +19,9 @@ const getConfig = (): ENV => ({
   NODE_ENV: process.env.NODE_ENV,
   MONGODB_URL: process.env.MONGODB_URL,
   FRONTEND_BASE_URL: process.env.FRONTEND_BASE_URL,
+  VERCEL_BASE_URL: process.env.VERCEL_BASE_URL,
   JWT_SECRET: process.env.JWT_SECRET,
-  LOG_LEVEL: process.env.LOG_LEVEL || 'info', // Default log level to 'info' if not specified in.env file
+  LOG_LEVEL: process.env.LOG_LEVEL || 'info',
 });
 
 const getSanitizedConfig = (config: ENV): EnvConfig => {
